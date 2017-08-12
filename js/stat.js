@@ -12,20 +12,12 @@ window.renderStatistics = function (ctx, names, times) {
       font: '16px PT Mono',
       style: '#000',
       baseLine: true,
-      firstLine: {
-        text: 'Ура вы победили!',
-        x: 120,
-        y: 40
-      },
-      secondLine: {
-        text: 'Список результатов:',
-        x: 120,
-        y: 60
-      }
+      text: 'Ура вы победили!\nСписок результатов:',
+      x: 120,
+      y: 40,
+      yOffset: 20
     }
   };
-  var congratsTextFirstLine = statsCloud.congratsText.firstLine;
-  var congratsTextSecondLine = statsCloud.congratsText.secondLine;
 
   // draw a statsCloud's shadow
   ctx.fillStyle = statsCloud.shadowStyle;
@@ -35,10 +27,20 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = statsCloud.style;
   ctx.fillRect(statsCloud.x, statsCloud.y, statsCloud.width, statsCloud.height);
 
-  // draw congratulations text
+  // Congratulations text
   ctx.font = statsCloud.congratsText.font;
   ctx.fillStyle = statsCloud.congratsText.style;
   ctx.baseline = statsCloud.congratsText.baseLine;
-  ctx.fillText(congratsTextFirstLine.text, congratsTextFirstLine.x, congratsTextFirstLine.y);
-  ctx.fillText(congratsTextSecondLine.text, congratsTextSecondLine.x, congratsTextSecondLine.y);
+
+  // split the text in lines
+  var congratsTextArr = statsCloud.congratsText.text.split('\n');
+
+  // draw each text line with yOffset except for the first line
+  for (var i = 0, yPosition = statsCloud.congratsText.y; i < congratsTextArr.length; i++) {
+    if (i !== 0) {
+      yPosition += statsCloud.congratsText.yOffset;
+    }
+
+    ctx.fillText(congratsTextArr[i], statsCloud.congratsText.x, yPosition);
+  }
 };
