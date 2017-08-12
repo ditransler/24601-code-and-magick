@@ -67,14 +67,12 @@ window.renderStatistics = function (ctx, names, times) {
   });
 
   // find the max histogram value
-  for (var l = 0, time; l < times.length; l++) {
-    time = times[l];
-
-    if (time > statsCloud.histogram.max) {
-      statsCloud.histogram.max = time;
-      statsCloud.histogram.maxIndex = l;
+  times.forEach(function (value, index) {
+    if (value > statsCloud.histogram.max) {
+      statsCloud.histogram.max = value;
+      statsCloud.histogram.maxIndex = index;
     }
-  }
+  });
 
   // find the histogram step
   statsCloud.histogram.step = statsCloud.histogram.height / (statsCloud.histogram.max - 0);
