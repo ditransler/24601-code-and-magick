@@ -56,14 +56,15 @@ window.renderStatistics = function (ctx, names, times) {
   var congratsTextLines = statsCloud.congratsText.text.split('\n');
 
   // draw each text line with yOffset except for the first line
+  var congratsTextLineYposition = statsCloud.congratsText.y;
+
   congratsTextLines.forEach(function (value, index) {
-    var y = statsCloud.congratsText.y;
 
     if (index !== 0) {
-      y += statsCloud.congratsText.yOffset;
+      congratsTextLineYposition += statsCloud.congratsText.yOffset;
     }
 
-    ctx.fillText(value, statsCloud.congratsText.x, y);
+    ctx.fillText(value, statsCloud.congratsText.x, congratsTextLineYposition);
   });
 
   // find the max histogram value
@@ -78,22 +79,32 @@ window.renderStatistics = function (ctx, names, times) {
   statsCloud.histogram.step = statsCloud.histogram.height / (statsCloud.histogram.max - 0);
 
   // draw histogram columns
-  for (var j = 0, columnXposition = statsCloud.histogram.initialX; j < times.length; j++) {
-    if (j !== 0) {
-      columnXposition += statsCloud.histogram.columnWidth + statsCloud.histogram.gutter;
+  var histogramColumnXposition = statsCloud.histogram.initialX;
+
+  times.forEach(function (value, index) {
+
+    if (index !== 0) {
+      histogramColumnXposition += statsCloud.histogram.columnWidth + statsCloud.histogram.gutter;
     }
 
-    if (names[j] === 'Вы') {
+    // Change the fill color of a column
+    if (names[index] === 'Вы') {
       ctx.fillStyle = statsCloud.histogram.yourColumnColor;
     } else {
       ctx.fillStyle = statsCloud.histogram.getOtherColumnsHSLColor();
     }
 
-    // use 'negative' heigth to draw a column from bottom to top
-    ctx.fillRect(columnXposition, statsCloud.histogram.initialY, statsCloud.histogram.columnWidth, -(times[j] * statsCloud.histogram.step));
+    var columnHeight = value * statsCloud.histogram.step;
+
+    // draw a column (use 'negative' height to draw a column from bottom to top)
+    ctx.fillRect(histogramColumnXposition, statsCloud.histogram.initialY, statsCloud.histogram.columnWidth, -columnHeight);
+
+    // draw labels (times and names)
+    var namesLabelY = statsCloud.histogram.initialY + 5; // will be above a column
+    var timesLabelY = statsCloud.histogram.initialY - (columnHeight + 25); // will under a column
 
     ctx.fillStyle = statsCloud.histogram.color;
-    ctx.fillText(Math.round(times[j]), columnXposition, statsCloud.histogram.initialY - (times[j] * statsCloud.histogram.step + 25));
-    ctx.fillText(names[j], columnXposition, statsCloud.histogram.initialY + 5);
-  }
+    ctx.fillText(Math.round(value), histogramColumnXposition, timesLabelY);
+    ctx.fillText(names[index], histogramColumnXposition, namesLabelY);
+  });
 };
