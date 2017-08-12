@@ -16,6 +16,20 @@ window.renderStatistics = function (ctx, names, times) {
       x: 120,
       y: 40,
       yOffset: 20
+    },
+    histogram: {
+      height: 150,
+      columnWidth: 40,
+      gutter: 50,
+      yourColumnColor: 'rgba(255, 0, 0, 1)',
+      otherColumnHSLColor: {
+        hue: 240,
+        saturation: 100,
+        lightness: 50
+      },
+      getOtherColumnsHSLColor: function (hue, saturation, lightness) {
+        return 'hsl(' + hue + ',' + saturation + '%,' + lightness + '%)';
+      }
     }
   };
 
