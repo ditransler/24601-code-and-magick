@@ -6,7 +6,7 @@ window.renderStatistics = function (ctx, names, times) {
     y: 10,
     width: 420,
     height: 270,
-    color: '#fff',
+    backgroundColor: '#fff',
     shadowStyle: 'rgba(0, 0, 0, 0.7)',
     congratsText: {
       font: '16px PT Mono',
@@ -24,7 +24,7 @@ window.renderStatistics = function (ctx, names, times) {
       initialX: 155,
       initialY: 250,
       color: '#000',
-      yourColumnColor: 'rgba(255, 0, 0, 1)',
+      yourColumnColor: 'rgba(255, 0, 0, 1)', // red color (#ff0000)
       getOtherColumnsHSLColor: function () {
         // blue color (#0000ff)
         var hue = 240;
@@ -44,7 +44,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillRect(statsCloud.x + 10, statsCloud.y + 10, statsCloud.width, statsCloud.height);
 
   // draw a statsCloud
-  ctx.fillStyle = statsCloud.color;
+  ctx.fillStyle = statsCloud.backgroundColor;
   ctx.fillRect(statsCloud.x, statsCloud.y, statsCloud.width, statsCloud.height);
 
   // Congratulations text
@@ -53,16 +53,18 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.textBaseline = statsCloud.congratsText.baseLine;
 
   // split the text in lines
-  var congratsTextArr = statsCloud.congratsText.text.split('\n');
+  var congratsTextLines = statsCloud.congratsText.text.split('\n');
 
   // draw each text line with yOffset except for the first line
-  for (var i = 0, congratsLineYposition = statsCloud.congratsText.y; i < congratsTextArr.length; i++) {
-    if (i !== 0) {
-      congratsLineYposition += statsCloud.congratsText.yOffset;
+  congratsTextLines.forEach(function (value, index) {
+    var y = statsCloud.congratsText.y;
+
+    if (index !== 0) {
+      y += statsCloud.congratsText.yOffset;
     }
 
-    ctx.fillText(congratsTextArr[i], statsCloud.congratsText.x, congratsLineYposition);
-  }
+    ctx.fillText(value, statsCloud.congratsText.x, y);
+  });
 
   // find the max histogram value
   for (var l = 0, time; l < times.length; l++) {
