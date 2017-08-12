@@ -11,10 +11,10 @@ window.renderStatistics = function (ctx, names, times) {
     congratsText: {
       font: '16px PT Mono',
       style: '#000',
-      baseLine: true,
+      baseLine: 'top',
       text: 'Ура вы победили!\nСписок результатов:',
       x: 120,
-      y: 40,
+      y: 30,
       yOffset: 20
     },
     histogram: {
@@ -44,7 +44,7 @@ window.renderStatistics = function (ctx, names, times) {
   // Congratulations text
   ctx.font = statsCloud.congratsText.font;
   ctx.fillStyle = statsCloud.congratsText.style;
-  ctx.baseline = statsCloud.congratsText.baseLine;
+  ctx.textBaseline = statsCloud.congratsText.baseLine;
 
   // split the text in lines
   var congratsTextArr = statsCloud.congratsText.text.split('\n');
