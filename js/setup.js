@@ -10,3 +10,11 @@ function getRandomArrItem(arr) {
 
   return arr[randomIndex];
 }
+
+function generateWizardName(names, surnames) {
+  var name = getRandomArrItem(names);
+  var surname = getRandomArrItem(surnames);
+  var isSwap = Math.floor(Math.random() * 2); // Get random binary value: 0 or 1
+
+  return isSwap ? name + ' ' + surname : surname + ' ' + name;
+}
