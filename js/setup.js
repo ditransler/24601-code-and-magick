@@ -40,13 +40,6 @@ function generateWizards(params) {
   return wizards;
 }
 
-var generatedWizards = generateWizards({
-  names: WIZARDS_NAMES,
-  surnames: WIZARDS_SURNAMES,
-  coatColors: COAT_COLORS,
-  eyesColors: EYES_COLORS
-});
-
 function renderWizard(wizard, template) {
   var wizardElement = template.cloneNode(true);
 
@@ -66,3 +59,22 @@ function addWizardsToList(wizards, list, template) {
 
   list.appendChild(fragment);
 }
+
+var userDialog = document.querySelector('.setup');
+var userDialogSimilar = userDialog.querySelector('.setup-similar');
+
+userDialog.classList.remove('hidden');
+
+var generatedWizards = generateWizards({
+  names: WIZARDS_NAMES,
+  surnames: WIZARDS_SURNAMES,
+  coatColors: COAT_COLORS,
+  eyesColors: EYES_COLORS
+});
+
+var setupSimilarList = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
+
+addWizardsToList(generatedWizards, setupSimilarList, similarWizardTemplate);
+
+userDialogSimilar.classList.remove('hidden');
