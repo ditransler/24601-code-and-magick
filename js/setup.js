@@ -56,3 +56,13 @@ function renderWizard(wizard, template) {
 
   return wizardElement;
 }
+
+function addWizardsToList(wizards, list, template) {
+  var fragment = document.createDocumentFragment();
+
+  wizards.forEach(function (wizard) {
+    fragment.appendChild(renderWizard(wizard, template));
+  });
+
+  list.appendChild(fragment);
+}
