@@ -46,3 +46,13 @@ var generatedWizards = generateWizards({
   coatColors: COAT_COLORS,
   eyesColors: EYES_COLORS
 });
+
+function renderWizard(wizard, template) {
+  var wizardElement = template.cloneNode(true);
+
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+
+  return wizardElement;
+}
