@@ -18,3 +18,31 @@ function generateWizardName(names, surnames) {
 
   return isSwap ? name + ' ' + surname : surname + ' ' + name;
 }
+
+function generateWizards(params) {
+  var wizards = [];
+
+  params = params || {};
+  params.quantity = params.quantity || 4;
+  params.names = params.names || [];
+  params.surnames = params.surnames || [];
+  params.coatColors = params.coatColors || [];
+  params.eyesColors = params.eyesColors || [];
+
+  for (var i = 0; i < params.quantity; i++) {
+    wizards.push({
+      name: generateWizardName(params.names, params.surnames),
+      coatColor: getRandomArrItem(params.coatColors),
+      eyesColor: getRandomArrItem(params.eyesColors)
+    });
+  }
+
+  return wizards;
+}
+
+var generatedWizards = generateWizards({
+  names: WIZARDS_NAMES,
+  surnames: WIZARDS_SURNAMES,
+  coatColors: COAT_COLORS,
+  eyesColors: EYES_COLORS
+});
