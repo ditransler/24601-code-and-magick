@@ -5,6 +5,11 @@ var WIZARDS_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 
+var KEYCODES = {
+  Enter: 13,
+  Esc: 27
+};
+
 function getRandomArrItem(arr) {
   var randomIndex = Math.floor(Math.random() * arr.length);
 
@@ -60,12 +65,22 @@ function addWizardsToList(wizards, list, template) {
   list.appendChild(fragment);
 }
 
-function closeUserDialog(item) {
-  item.classList.add('hidden');
+function onUserDialogEscPress(evt) {
+  if (evt.keyCode !== KEYCODES.Esc) {
+    return;
+  }
+
+  closeUserDialog();
 }
 
-function openUserDialog(item) {
-  item.classList.remove('hidden');
+function closeUserDialog() {
+  userDialog.classList.add('hidden');
+  document.removeEventListener('keydown', onUserDialogEscPress);
+}
+
+function openUserDialog() {
+  userDialog.classList.remove('hidden');
+  document.addEventListener('keydown', onUserDialogEscPress);
 }
 
 var userDialog = document.querySelector('.setup');
@@ -74,11 +89,11 @@ var userDialogSimilar = userDialog.querySelector('.setup-similar');
 var userAvatar = document.querySelector('.setup-open');
 
 userAvatar.addEventListener('click', function onUserAvatarClick() {
-  openUserDialog(userDialog);
+  openUserDialog();
 });
 
 userDialogClose.addEventListener('click', function onUserDialogCloseClick() {
-  closeUserDialog(userDialog);
+  closeUserDialog();
 });
 
 var generatedWizards = generateWizards({
