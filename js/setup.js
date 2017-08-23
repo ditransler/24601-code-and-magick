@@ -91,6 +91,8 @@ var userDialog = document.querySelector('.setup');
 var userDialogClose = userDialog.querySelector('.setup-close');
 var userDialogSimilar = userDialog.querySelector('.setup-similar');
 var userDialogName = userDialog.querySelector('.setup-user-name');
+var userDialogSubmit = userDialog.querySelector('.setup-submit');
+
 var userAvatar = document.querySelector('.setup-open');
 var userAvatarIcon = userAvatar.querySelector('.setup-open-icon');
 
@@ -116,6 +118,22 @@ userAvatarIcon.addEventListener('keydown', function onUserAvatarIconEnterPress(e
   }
 
   openUserDialog();
+});
+
+userDialogSubmit.addEventListener('click', function onUserDialogSubmitClick(evt) {
+  evt.preventDefault();
+
+  closeUserDialog();
+});
+
+userDialogSubmit.addEventListener('keydown', function onUserDialogSubmitEnterPress(evt) {
+  if (evt.keyCode !== KEYCODES.Enter) {
+    return;
+  }
+
+  evt.preventDefault();
+
+  closeUserDialog();
 });
 
 var generatedWizards = generateWizards({
