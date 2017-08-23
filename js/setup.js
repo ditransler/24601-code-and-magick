@@ -62,8 +62,11 @@ function addWizardsToList(wizards, list, template) {
 
 var userDialog = document.querySelector('.setup');
 var userDialogSimilar = userDialog.querySelector('.setup-similar');
+var userAvatar = document.querySelector('.setup-open');
 
-userDialog.classList.remove('hidden');
+userAvatar.addEventListener('click', function onUserAvatarClick() {
+  userDialog.classList.remove('hidden');
+});
 
 var generatedWizards = generateWizards({
   names: WIZARDS_NAMES,
