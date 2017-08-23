@@ -87,6 +87,7 @@ var userDialog = document.querySelector('.setup');
 var userDialogClose = userDialog.querySelector('.setup-close');
 var userDialogSimilar = userDialog.querySelector('.setup-similar');
 var userAvatar = document.querySelector('.setup-open');
+var userAvatarIcon = userAvatar.querySelector('.setup-open-icon');
 
 userAvatar.addEventListener('click', function onUserAvatarClick() {
   openUserDialog();
@@ -94,6 +95,22 @@ userAvatar.addEventListener('click', function onUserAvatarClick() {
 
 userDialogClose.addEventListener('click', function onUserDialogCloseClick() {
   closeUserDialog();
+});
+
+userDialogClose.addEventListener('keydown', function onUserDialogCloseEnterPress(evt) {
+  if (evt.keyCode !== KEYCODES.Enter) {
+    return;
+  }
+
+  closeUserDialog();
+});
+
+userAvatarIcon.addEventListener('keydown', function onUserAvatarIconEnterPress(evt) {
+  if (evt.keyCode !== KEYCODES.Enter) {
+    return;
+  }
+
+  openUserDialog();
 });
 
 var generatedWizards = generateWizards({
