@@ -70,6 +70,10 @@ function onUserDialogEscPress(evt) {
     return;
   }
 
+  if (document.activeElement === userDialogName) {
+    return;
+  }
+
   closeUserDialog();
 }
 
@@ -86,6 +90,7 @@ function openUserDialog() {
 var userDialog = document.querySelector('.setup');
 var userDialogClose = userDialog.querySelector('.setup-close');
 var userDialogSimilar = userDialog.querySelector('.setup-similar');
+var userDialogName = userDialog.querySelector('.setup-user-name');
 var userAvatar = document.querySelector('.setup-open');
 var userAvatarIcon = userAvatar.querySelector('.setup-open-icon');
 
