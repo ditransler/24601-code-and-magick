@@ -60,12 +60,25 @@ function addWizardsToList(wizards, list, template) {
   list.appendChild(fragment);
 }
 
+function closeUserDialog(item) {
+  item.classList.add('hidden');
+}
+
+function openUserDialog(item) {
+  item.classList.remove('hidden');
+}
+
 var userDialog = document.querySelector('.setup');
+var userDialogClose = userDialog.querySelector('.setup-close');
 var userDialogSimilar = userDialog.querySelector('.setup-similar');
 var userAvatar = document.querySelector('.setup-open');
 
 userAvatar.addEventListener('click', function onUserAvatarClick() {
-  userDialog.classList.remove('hidden');
+  openUserDialog(userDialog);
+});
+
+userDialogClose.addEventListener('click', function onUserDialogCloseClick() {
+  closeUserDialog(userDialog);
 });
 
 var generatedWizards = generateWizards({
