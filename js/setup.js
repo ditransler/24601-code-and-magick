@@ -97,6 +97,23 @@ var userDialogSubmit = userDialog.querySelector('.setup-submit');
 var userAvatar = document.querySelector('.setup-open');
 var userAvatarIcon = userAvatar.querySelector('.setup-open-icon');
 
+var userWizard = document.querySelector('.setup-wizard');
+var userFireballWrap = document.querySelector('.setup-fireball-wrap');
+
+userWizard.addEventListener('click', function onUserWizardClick(evt) {
+  if (evt.target.classList.contains('wizard-coat')) {
+    evt.target.setAttribute('style', 'fill:' + getRandomArrItem(COAT_COLORS));
+  }
+
+  if (evt.target.classList.contains('wizard-eyes')) {
+    evt.target.setAttribute('style', 'fill:' + getRandomArrItem(EYES_COLORS));
+  }
+});
+
+userFireballWrap.addEventListener('click', function onUserFireballWrapClick(evt) {
+  evt.currentTarget.setAttribute('style', 'background-color:' + getRandomArrItem(FIREBALL_COLORS));
+});
+
 userAvatar.addEventListener('click', function onUserAvatarClick() {
   openUserDialog();
 });
