@@ -6,11 +6,6 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
-var KEYCODES = {
-  Enter: 13,
-  Esc: 27
-};
-
 function getRandomArrItem(arr) {
   var randomIndex = Math.floor(Math.random() * arr.length);
 
@@ -67,7 +62,7 @@ function addWizardsToList(wizards, list, template) {
 }
 
 function onUserDialogEscPress(evt) {
-  if (evt.keyCode !== KEYCODES.Esc) {
+  if (!window.util.isEscEvent(evt)) {
     return;
   }
 
@@ -123,7 +118,7 @@ userDialogClose.addEventListener('click', function onUserDialogCloseClick() {
 });
 
 userDialogClose.addEventListener('keydown', function onUserDialogCloseEnterPress(evt) {
-  if (evt.keyCode !== KEYCODES.Enter) {
+  if (!window.util.isEnterEvent(evt)) {
     return;
   }
 
@@ -131,7 +126,7 @@ userDialogClose.addEventListener('keydown', function onUserDialogCloseEnterPress
 });
 
 userAvatarIcon.addEventListener('keydown', function onUserAvatarIconEnterPress(evt) {
-  if (evt.keyCode !== KEYCODES.Enter) {
+  if (!window.util.isEnterEvent(evt)) {
     return;
   }
 
@@ -145,7 +140,7 @@ userDialogSubmit.addEventListener('click', function onUserDialogSubmitClick(evt)
 });
 
 userDialogSubmit.addEventListener('keydown', function onUserDialogSubmitEnterPress(evt) {
-  if (evt.keyCode !== KEYCODES.Enter) {
+  if (!window.util.isEnterEvent(evt)) {
     return;
   }
 
