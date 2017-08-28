@@ -1,20 +1,24 @@
 'use strict';
 
 (function () {
-  var userWizard = document.querySelector('.setup-wizard');
-  var userFireballWrap = document.querySelector('.setup-fireball-wrap');
+  var setupWizard = document.querySelector('.setup-wizard');
+  var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
 
-  userWizard.addEventListener('click', function onUserWizardClick(evt) {
+  function colorize(elem, property, colorSet) {
+    elem.style[property] = window.util.getRandomArrItem(window.util.COLORS[colorSet]);
+  }
+
+  setupWizard.addEventListener('click', function onSetupWizardClick(evt) {
     if (evt.target.classList.contains('wizard-coat')) {
-      evt.target.setAttribute('style', 'fill:' + window.util.getRandomArrItem(window.util.COLORS.coat));
+      colorize(evt.target, 'fill', 'coat');
     }
 
     if (evt.target.classList.contains('wizard-eyes')) {
-      evt.target.setAttribute('style', 'fill:' + window.util.getRandomArrItem(window.util.COLORS.eyes));
+      colorize(evt.target, 'fill', 'eyes');
     }
   });
 
-  userFireballWrap.addEventListener('click', function onUserFireballWrapClick(evt) {
-    evt.currentTarget.setAttribute('style', 'background-color:' + window.util.getRandomArrItem(window.util.COLORS.fireball));
+  setupFireballWrap.addEventListener('click', function onSetupFireballWrapClick(evt) {
+    colorize(evt.currentTarget, 'background-color', 'fireball');
   });
 })();
