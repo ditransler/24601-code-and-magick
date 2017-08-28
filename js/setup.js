@@ -6,15 +6,9 @@ var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
-function getRandomArrItem(arr) {
-  var randomIndex = Math.floor(Math.random() * arr.length);
-
-  return arr[randomIndex];
-}
-
 function generateWizardName(names, surnames) {
-  var name = getRandomArrItem(names);
-  var surname = getRandomArrItem(surnames);
+  var name = window.util.getRandomArrItem(names);
+  var surname = window.util.getRandomArrItem(surnames);
   var isSwap = Math.floor(Math.random() * 2); // Get random binary value: 0 or 1
 
   return isSwap ? name + ' ' + surname : surname + ' ' + name;
@@ -33,8 +27,8 @@ function generateWizards(params) {
   for (var i = 0; i < params.quantity; i++) {
     wizards.push({
       name: generateWizardName(params.names, params.surnames),
-      coatColor: getRandomArrItem(params.coatColors),
-      eyesColor: getRandomArrItem(params.eyesColors)
+      coatColor: window.util.getRandomArrItem(params.coatColors),
+      eyesColor: window.util.getRandomArrItem(params.eyesColors)
     });
   }
 
@@ -97,16 +91,16 @@ var userFireballWrap = document.querySelector('.setup-fireball-wrap');
 
 userWizard.addEventListener('click', function onUserWizardClick(evt) {
   if (evt.target.classList.contains('wizard-coat')) {
-    evt.target.setAttribute('style', 'fill:' + getRandomArrItem(COAT_COLORS));
+    evt.target.setAttribute('style', 'fill:' + window.util.getRandomArrItem(COAT_COLORS));
   }
 
   if (evt.target.classList.contains('wizard-eyes')) {
-    evt.target.setAttribute('style', 'fill:' + getRandomArrItem(EYES_COLORS));
+    evt.target.setAttribute('style', 'fill:' + window.util.getRandomArrItem(EYES_COLORS));
   }
 });
 
 userFireballWrap.addEventListener('click', function onUserFireballWrapClick(evt) {
-  evt.currentTarget.setAttribute('style', 'background-color:' + getRandomArrItem(FIREBALL_COLORS));
+  evt.currentTarget.setAttribute('style', 'background-color:' + window.util.getRandomArrItem(FIREBALL_COLORS));
 });
 
 userAvatar.addEventListener('click', function onUserAvatarClick() {
