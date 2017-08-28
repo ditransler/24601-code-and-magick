@@ -55,37 +55,7 @@ function addWizardsToList(wizards, list, template) {
   list.appendChild(fragment);
 }
 
-function onUserDialogEscPress(evt) {
-  if (!window.util.isEscEvent(evt)) {
-    return;
-  }
-
-  if (document.activeElement === userDialogName) {
-    return;
-  }
-
-  closeUserDialog();
-}
-
-function closeUserDialog() {
-  userDialog.classList.add('hidden');
-  document.removeEventListener('keydown', onUserDialogEscPress);
-}
-
-function openUserDialog() {
-  userDialog.classList.remove('hidden');
-  document.addEventListener('keydown', onUserDialogEscPress);
-}
-
-var userDialog = document.querySelector('.setup');
-var userDialogClose = userDialog.querySelector('.setup-close');
-var userDialogSimilar = userDialog.querySelector('.setup-similar');
-var userDialogName = userDialog.querySelector('.setup-user-name');
-var userDialogSubmit = userDialog.querySelector('.setup-submit');
-
-var userAvatar = document.querySelector('.setup-open');
-var userAvatarIcon = userAvatar.querySelector('.setup-open-icon');
-
+var userDialogSimilar = document.querySelector('.setup-similar');
 var userWizard = document.querySelector('.setup-wizard');
 var userFireballWrap = document.querySelector('.setup-fireball-wrap');
 
@@ -101,46 +71,6 @@ userWizard.addEventListener('click', function onUserWizardClick(evt) {
 
 userFireballWrap.addEventListener('click', function onUserFireballWrapClick(evt) {
   evt.currentTarget.setAttribute('style', 'background-color:' + window.util.getRandomArrItem(FIREBALL_COLORS));
-});
-
-userAvatar.addEventListener('click', function onUserAvatarClick() {
-  openUserDialog();
-});
-
-userDialogClose.addEventListener('click', function onUserDialogCloseClick() {
-  closeUserDialog();
-});
-
-userDialogClose.addEventListener('keydown', function onUserDialogCloseEnterPress(evt) {
-  if (!window.util.isEnterEvent(evt)) {
-    return;
-  }
-
-  closeUserDialog();
-});
-
-userAvatarIcon.addEventListener('keydown', function onUserAvatarIconEnterPress(evt) {
-  if (!window.util.isEnterEvent(evt)) {
-    return;
-  }
-
-  openUserDialog();
-});
-
-userDialogSubmit.addEventListener('click', function onUserDialogSubmitClick(evt) {
-  evt.preventDefault();
-
-  closeUserDialog();
-});
-
-userDialogSubmit.addEventListener('keydown', function onUserDialogSubmitEnterPress(evt) {
-  if (!window.util.isEnterEvent(evt)) {
-    return;
-  }
-
-  evt.preventDefault();
-
-  closeUserDialog();
 });
 
 var generatedWizards = generateWizards({

@@ -7,10 +7,10 @@
   };
 
   window.util = {
-    isEscEvent: function (evt) {
+    isEscKey: function (evt) {
       return evt.keyCode === KEYCODES.Esc;
     },
-    isEnterEvent: function (evt) {
+    isEnterKey: function (evt) {
       return evt.keyCode === KEYCODES.Enter;
     },
     getRandomArrItem: function (arr) {
