@@ -89,8 +89,24 @@
         y: moveEvt.clientY
       };
 
-      setup.style.top = (setup.offsetTop - shift.y) + 'px';
-      setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+      var newTop = setup.offsetTop - shift.y;
+      var newLeft = setup.offsetLeft - shift.x;
+      var setupHalfWidth = setup.offsetWidth / 2;
+
+      if (newTop < 0) {
+        newTop = 0;
+      }
+
+      if (newLeft - setupHalfWidth < 0) {
+        newLeft = setupHalfWidth;
+      }
+
+      if (newLeft + setupHalfWidth > window.innerWidth) {
+        newLeft = window.innerWidth - setupHalfWidth;
+      }
+
+      setup.style.top = newTop + 'px';
+      setup.style.left = newLeft + 'px';
     }
 
     function onMouseUp(upEvt) {
