@@ -857,6 +857,10 @@ input[type=radio]:checked + .review-mark-label {
   z-index: 1;
 }
 
+.upload .setup-user-pic:active {
+  cursor: move;
+}
+
 .upload input {
   position: absolute;
   z-index: 0;

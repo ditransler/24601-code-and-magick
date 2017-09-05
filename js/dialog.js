@@ -11,6 +11,7 @@
 
   function closeSetup() {
     setup.classList.add('hidden');
+    setup.style = '';
     document.removeEventListener('keydown', onSetupEscPress);
   }
 
