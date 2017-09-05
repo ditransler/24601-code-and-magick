@@ -854,6 +854,7 @@ input[type=radio]:checked + .review-mark-label {
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 1;
 }
 
 .upload input {
