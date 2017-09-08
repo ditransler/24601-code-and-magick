@@ -33,17 +33,9 @@
     closeSetup();
   }
 
-  function onLoad() {
-    closeSetup();
-  }
-
-  function onError(err) {
-    return err;
-  }
-
   function saveData() {
     var data = new FormData(setupForm);
-    window.backend.save(data, onLoad, onError);
+    window.backend.save(data, closeSetup, window.backend.onError);
   }
 
   setupOpen.addEventListener('click', openSetup);

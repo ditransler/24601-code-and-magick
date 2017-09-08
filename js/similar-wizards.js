@@ -33,18 +33,14 @@
     });
   }
 
-  function onLoad(response) {
+  function loadHandler(response) {
     addWizardsToList(pickRandomItems(response, 4), setupSimilarList, similarWizardTemplate);
     setupSimilar.classList.remove('hidden');
-  }
-
-  function onError(err) {
-    return err;
   }
 
   var setupSimilar = document.querySelector('.setup-similar');
   var setupSimilarList = setupSimilar.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
-  window.backend.load(onLoad, onError);
+  window.backend.load(loadHandler, window.backend.onError);
 })();
