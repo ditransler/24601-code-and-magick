@@ -7,8 +7,6 @@
   };
 
   function makeRequest(data, onLoad, onError) {
-    data = data || null;
-
     var xhr = new XMLHttpRequest();
 
     xhr.responseType = 'json';
@@ -30,7 +28,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    if (data !== null) {
+    if (data === null) {
       xhr.open('GET', URLs.load);
       xhr.send();
     } else {
@@ -41,7 +39,7 @@
 
   window.backend = {
     load: function (onLoad, onError) {
-      makeRequest(onLoad, onError);
+      makeRequest(null, onLoad, onError);
     },
     save: function (data, onLoad, onError) {
       makeRequest(data, onLoad, onError);
