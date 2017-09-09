@@ -1,7 +1,10 @@
 'use strict';
 
 (function () {
+  var SIMILAR_WIZARDS_NUMBER = 4;
   var similarWizards = [];
+  var coatColor;
+  var eyesColor;
 
   function pickRandomItems(items, amount) {
     /**
@@ -14,15 +17,73 @@
     });
   }
 
+  function pickItems(items, amount) {
+    var pickedItems = [];
+
+    for (var i = 0; i < amount; i++) {
+      pickedItems.push(items[i]);
+    }
+
+    return pickedItems;
+  }
+
+  function getRank(wizard) {
+    var rank = 0;
+
+    if (wizard.colorCoat === coatColor) {
+      rank += 2;
+    }
+
+    if (wizard.colorEyes === eyesColor) {
+      rank += 1;
+    }
+
+    return rank;
+  }
+
+  function namesComparator(left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
+  }
+
+  function sortWizards(left, right) {
+    var rankDiff = getRank(right) - getRank(left);
+
+    if (rankDiff === 0) {
+      rankDiff = namesComparator(left.name, right.name);
+    }
+
+    return rankDiff;
+  }
+
+  function updateWizards() {
+    similarWizards.sort(sortWizards)
+    window.render.addWizardsToList(pickItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
+  }
+
   function loadHandler(response) {
     similarWizards = response;
-    window.render.addWizardsToList(pickRandomItems(similarWizards, 4), setupSimilarList);
+    window.render.addWizardsToList(pickRandomItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
     setupSimilar.classList.remove('hidden');
   }
 
+  window.wizard.onEyesChange = function (color) {
+    eyesColor = color;
+    updateWizards();
+  };
+
+  window.wizard.onCoatChange = function (color) {
+    coatColor = color;
+    updateWizards();
+  };
+
   var setupSimilar = document.querySelector('.setup-similar');
   var setupSimilarList = setupSimilar.querySelector('.setup-similar-list');
-
 
   window.backend.load(loadHandler, window.backend.onError);
 })();

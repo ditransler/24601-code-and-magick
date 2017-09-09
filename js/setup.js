@@ -1,30 +1,15 @@
 'use strict';
 
 (function () {
-  var setupWizard = document.querySelector('.setup-wizard');
   var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
 
   var shopElement = document.querySelector('.setup-artifacts-shop');
   var artifactsElement = document.querySelector('.setup-artifacts');
   var draggedItem = null;
 
-  function fillElement(element, color) {
-    element.style.fill = color;
-  }
-
   function changeElementBackground(element, color) {
     element.style.backgroundColor = color;
   }
-
-  setupWizard.addEventListener('click', function onSetupWizardClick(evt) {
-    if (evt.target.classList.contains('wizard-coat')) {
-      window.colorizeElement(evt.target, window.util.COLORS['coat'], fillElement);
-    }
-
-    if (evt.target.classList.contains('wizard-eyes')) {
-      window.colorizeElement(evt.target, window.util.COLORS['eyes'], fillElement);
-    }
-  });
 
   setupFireballWrap.addEventListener('click', function onSetupFireballWrapClick(evt) {
     window.colorizeElement(evt.currentTarget, window.util.COLORS['fireball'], changeElementBackground);
