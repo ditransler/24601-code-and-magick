@@ -8,22 +8,26 @@
   var artifactsElement = document.querySelector('.setup-artifacts');
   var draggedItem = null;
 
-  function colorize(elem, property, colorSet) {
-    elem.style[property] = window.util.getRandomArrItem(window.util.COLORS[colorSet]);
+  function fillElement(element, color) {
+    element.style.fill = color;
+  }
+
+  function changeElementBackground(element, color) {
+    element.style.backgroundColor = color;
   }
 
   setupWizard.addEventListener('click', function onSetupWizardClick(evt) {
     if (evt.target.classList.contains('wizard-coat')) {
-      colorize(evt.target, 'fill', 'coat');
+      window.colorizeElement(evt.target, window.util.COLORS['coat'], fillElement);
     }
 
     if (evt.target.classList.contains('wizard-eyes')) {
-      colorize(evt.target, 'fill', 'eyes');
+      window.colorizeElement(evt.target, window.util.COLORS['eyes'], fillElement);
     }
   });
 
   setupFireballWrap.addEventListener('click', function onSetupFireballWrapClick(evt) {
-    colorize(evt.currentTarget, 'background-color', 'fireball');
+    window.colorizeElement(evt.currentTarget, window.util.COLORS['fireball'], changeElementBackground);
   });
 
   shopElement.addEventListener('dragstart', function (evt) {
