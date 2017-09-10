@@ -2,6 +2,7 @@
 
 (function () {
   var setup = document.querySelector('.setup');
+  var setupForm = setup.querySelector('.setup-wizard-form');
   var setupClose = setup.querySelector('.setup-close');
   var setupUserName = setup.querySelector('.setup-user-name');
   var setupUserPic = setup.querySelector('.setup-user-pic');
@@ -32,6 +33,11 @@
     closeSetup();
   }
 
+  function saveData() {
+    var data = new FormData(setupForm);
+    window.backend.save(data, closeSetup, window.backend.onError);
+  }
+
   setupOpen.addEventListener('click', openSetup);
 
   setupClose.addEventListener('click', closeSetup);
@@ -39,7 +45,7 @@
   setupSubmit.addEventListener('click', function onSetupSubmitClick(evt) {
     evt.preventDefault();
 
-    closeSetup();
+    saveData();
   });
 
   setupOpenIcon.addEventListener('keydown', function onSetupOpenIconEnterPress(evt) {
@@ -65,7 +71,7 @@
 
     evt.preventDefault();
 
-    closeSetup();
+    saveData();
   });
 
   setupUserPic.addEventListener('mousedown', function (evt) {
