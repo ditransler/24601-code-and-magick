@@ -4,8 +4,8 @@
   var setupWizard = document.querySelector('.setup-wizard');
 
   var wizardObject = {
-    onEyesChange: function (color) {},
-    onCoatChange: function (color) {}
+    onEyesChange: function () {},
+    onCoatChange: function () {}
   };
 
   function fillElement(element, color) {
@@ -27,5 +27,5 @@
     }
   });
 
-  return window.wizard = wizardObject;
+  window.wizard = wizardObject;
 })();

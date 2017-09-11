@@ -62,7 +62,7 @@
   }
 
   function updateWizards() {
-    similarWizards.sort(sortWizards)
+    similarWizards.sort(sortWizards);
     window.render.addWizardsToList(pickItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
   }
 
