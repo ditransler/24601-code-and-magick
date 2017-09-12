@@ -2,6 +2,10 @@
 
 (function () {
   window.colorizeElement = function (element, colors, cb) {
-    cb(element, window.util.getRandomArrItem(colors));
+    var color = window.util.getRandomArrItem(colors);
+
+    cb(element, color);
+
+    return color;
   };
 })();
