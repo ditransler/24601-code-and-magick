@@ -2,30 +2,20 @@
 
 (function () {
   var setupWizard = document.querySelector('.setup-wizard');
+  var wizardName = document.querySelector('.setup-user-name');
 
-  var wizardObject = {
-    onEyesChange: function () {},
-    onCoatChange: function () {}
-  };
-
-  function fillElement(element, color) {
-    element.style.fill = color;
-  }
+  var wizard = new window.Wizard({name: wizardName.value});
 
   setupWizard.addEventListener('click', function onSetupWizardClick(evt) {
-    var newColor;
-
     if (evt.target.classList.contains('wizard-coat')) {
-      newColor = window.colorizeElement(evt.target, window.util.COLORS['coat'], fillElement);
-      window.wizard.onCoatChange(newColor);
+      evt.target.style.fill = wizard.changeCoatColor();
       return;
     }
 
     if (evt.target.classList.contains('wizard-eyes')) {
-      newColor = window.colorizeElement(evt.target, window.util.COLORS['eyes'], fillElement);
-      window.wizard.onEyesChange(newColor);
+      evt.target.style.fill = wizard.changeEyesColor();
     }
   });
 
-  window.wizard = wizardObject;
+  window.myWizard = wizard;
 })();
