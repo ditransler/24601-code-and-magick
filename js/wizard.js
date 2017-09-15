@@ -10,6 +10,7 @@
     this.name = data.name;
     this.coatColor = data.colorCoat;
     this.eyesColor = data.colorEyes;
+    this.artifacts = data.artifacts;
   };
 
   Wizard.prototype.setName = function (name) {

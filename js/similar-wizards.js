@@ -3,8 +3,6 @@
 (function () {
   var SIMILAR_WIZARDS_NUMBER = 4;
   var similarWizards = [];
-  var coatColor;
-  var eyesColor;
 
   function pickRandomItems(items, amount) {
     /**
@@ -30,11 +28,11 @@
   function getRank(wizard) {
     var rank = 0;
 
-    if (wizard.colorCoat === coatColor) {
+    if (wizard.coatColor === window.myWizard.coatColor) {
       rank += 2;
     }
 
-    if (wizard.colorEyes === eyesColor) {
+    if (wizard.eyesColor === window.myWizard.eyesColor) {
       rank += 1;
     }
 
@@ -51,34 +49,27 @@
     }
   }
 
-  function sortWizards(left, right) {
+  function wizardsComparator(left, right) {
     var rankDiff = getRank(right) - getRank(left);
 
-    if (rankDiff === 0) {
-      rankDiff = namesComparator(left.name, right.name);
-    }
-
-    return rankDiff;
+    return (rankDiff === 0) ? namesComparator(left.name, right.name) : rankDiff;
   }
 
   function updateWizards() {
-    similarWizards.sort(sortWizards);
+    similarWizards.sort(wizardsComparator);
     window.render.addWizardsToList(pickItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
   }
 
   function loadHandler(response) {
-    similarWizards = response;
+    similarWizards = response.map(function (it) {
+      return new window.Wizard(it);
+    });
+
     window.render.addWizardsToList(pickRandomItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
     setupSimilar.classList.remove('hidden');
   }
 
-  window.wizard.onEyesChange = function (color) {
-    eyesColor = color;
-    window.debounce(updateWizards);
-  };
-
-  window.wizard.onCoatChange = function (color) {
-    coatColor = color;
+  window.myWizard.onChange = function () {
     window.debounce(updateWizards);
   };
 
