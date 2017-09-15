@@ -869,3 +869,15 @@ input[type=radio]:checked + .review-mark-label {
   left: 0;
   top: 0;
 }
+
+.popup {
+  position: absolute;
+  z-index: 100;
+
+  min-width: 200px;
+
+  background-color: #414342;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+}
