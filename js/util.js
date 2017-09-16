@@ -12,6 +12,8 @@
     fireball: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848']
   };
 
+  var DEBOUNCE_INTERVAL = 500; // ms
+
   window.util = {
     isEscKey: function (evt) {
       return evt.keyCode === KEYCODES.Esc;
@@ -23,6 +25,17 @@
       var randomIndex = Math.floor(Math.random() * arr.length);
 
       return arr[randomIndex];
+    },
+    debounce: function (func) {
+      var lastTimeout;
+
+      return function () {
+        if (lastTimeout) {
+          window.clearTimeout(lastTimeout);
+        }
+
+        lastTimeout = window.setTimeout(func, DEBOUNCE_INTERVAL);
+      };
     },
     COLORS: COLORS
   };

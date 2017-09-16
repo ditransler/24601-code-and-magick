@@ -69,8 +69,10 @@
     setupSimilar.classList.remove('hidden');
   }
 
+  var debouncedUpdateWizards = window.util.debounce(updateWizards);
+
   window.myWizard.onChange = function () {
-    window.debounce(updateWizards);
+    debouncedUpdateWizards();
   };
 
   var setupSimilar = document.querySelector('.setup-similar');
