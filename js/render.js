@@ -19,7 +19,7 @@
     return wizardElement;
   }
 
-  function addWizardsToList(wizards, list) {
+  window.render = function (wizards, list) {
     var fragment = document.createDocumentFragment();
 
     wizards.forEach(function (wizard) {
@@ -28,9 +28,5 @@
 
     list.innerHTML = '';
     list.appendChild(fragment);
-  }
-
-  window.render = {
-    addWizardsToList: addWizardsToList
   };
 })();

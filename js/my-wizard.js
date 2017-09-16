@@ -19,7 +19,7 @@
     }
   });
 
-  setupWizardFireball.addEventListener('click', function onSetupWizardFireballpClick(evt) {
+  setupWizardFireball.addEventListener('click', function onSetupWizardFireballClick(evt) {
     evt.target.style.backgroundColor = wizard.changeFireballColor();
   });
 

@@ -57,7 +57,7 @@
 
   function updateWizards() {
     similarWizards.sort(wizardsComparator);
-    window.render.addWizardsToList(pickItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
+    window.render(pickItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
   }
 
   function loadHandler(response) {
@@ -65,7 +65,7 @@
       return new window.Wizard(it);
     });
 
-    window.render.addWizardsToList(pickRandomItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
+    window.render(pickRandomItems(similarWizards, SIMILAR_WIZARDS_NUMBER), setupSimilarList);
     setupSimilar.classList.remove('hidden');
   }
 
