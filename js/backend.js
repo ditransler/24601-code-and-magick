@@ -6,7 +6,7 @@
     save: 'https://1510.dump.academy/code-and-magick'
   };
 
-  function makeRequest(data, onLoad, onError) {
+  function createRequest(onLoad, onError) {
     var xhr = new XMLHttpRequest();
 
     xhr.responseType = 'json';
@@ -28,21 +28,19 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    if (data === null) {
-      xhr.open('GET', URLs.load);
-      xhr.send();
-    } else {
-      xhr.open('POST', URLs.save);
-      xhr.send(data);
-    }
+    return xhr;
   }
 
   window.backend = {
     load: function (onLoad, onError) {
-      makeRequest(null, onLoad, onError);
+      var loadXHR = createRequest(onLoad, onError);
+      loadXHR.open('GET', URLs.load);
+      loadXHR.send();
     },
     save: function (data, onLoad, onError) {
-      makeRequest(data, onLoad, onError);
+      var saveXHR = createRequest(onLoad, onError);
+      saveXHR.open('POST', URLs.save);
+      saveXHR.send(data);
     },
     onError: function (err) {
       var node = document.createElement('div');
