@@ -10,6 +10,12 @@
     wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
     wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
+    window.popup(wizardElement.querySelector('.wizard'), function () {
+      return wizard.artifacts.map(function (it) {
+        return it.name;
+      }).join('<br>');
+    });
+
     return wizardElement;
   }
 

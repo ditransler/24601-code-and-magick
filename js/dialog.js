@@ -5,10 +5,10 @@
   var setupForm = setup.querySelector('.setup-wizard-form');
   var setupClose = setup.querySelector('.setup-close');
   var setupUserName = setup.querySelector('.setup-user-name');
-  var setupUserPic = setup.querySelector('.setup-user-pic');
   var setupSubmit = setup.querySelector('.setup-submit');
   var setupOpen = document.querySelector('.setup-open');
   var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
+  var setupUpload = setup.querySelector('.upload');
 
   function closeSetup() {
     setup.classList.add('hidden');
@@ -74,7 +74,7 @@
     saveData();
   });
 
-  setupUserPic.addEventListener('mousedown', function (evt) {
+  setupUpload.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -82,8 +82,12 @@
       y: evt.clientY
     };
 
+    var dragged = false;
+
     function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
+
+      dragged = true;
 
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -120,6 +124,15 @@
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
+
+      if (!dragged) {
+        return;
+      }
+
+      setupUpload.addEventListener('click', function onClickPreventDefault(clickEvt) {
+        clickEvt.preventDefault();
+        setupUpload.removeEventListener('click', onClickPreventDefault);
+      });
     }
 
     document.addEventListener('mousemove', onMouseMove);
