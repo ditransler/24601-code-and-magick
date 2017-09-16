@@ -1,19 +1,9 @@
 'use strict';
 
 (function () {
-  var setupFireballWrap = document.querySelector('.setup-fireball-wrap');
-
   var shopElement = document.querySelector('.setup-artifacts-shop');
   var artifactsElement = document.querySelector('.setup-artifacts');
   var draggedItem = null;
-
-  function changeElementBackground(element, color) {
-    element.style.backgroundColor = color;
-  }
-
-  setupFireballWrap.addEventListener('click', function onSetupFireballWrapClick(evt) {
-    window.colorizeElement(evt.currentTarget, window.util.COLORS['fireball'], changeElementBackground);
-  });
 
   shopElement.addEventListener('dragstart', function (evt) {
     if (evt.target.tagName.toLowerCase() !== 'img') {
