@@ -8,6 +8,20 @@
 
   var wizard = new window.Wizard({name: wizardName.value});
 
+  wizard.selfRerender = function () {
+    var wizardCopy = document.querySelector('svg').cloneNode(true);
+
+    wizardCopy.querySelector('#wizard-coat').style.fill = wizard.coatColor;
+    wizardCopy.querySelector('#wizard-eyes').style.fill = wizard.eyesColor;
+
+    var wizardBase64Right = window.util.svg2base64(wizardCopy);
+
+    wizardCopy.querySelector('#wizard').setAttribute('transform', 'translate(62, 0) scale(-1, 1)');
+    var wizardBase64Left = window.util.svg2base64(wizardCopy);
+
+    window.restartGame(wizardBase64Right, wizardBase64Left);
+  };
+
   setupWizard.addEventListener('click', function onSetupWizardClick(evt) {
     if (evt.target.classList.contains('wizard-coat')) {
       evt.target.style.fill = wizard.changeCoatColor();

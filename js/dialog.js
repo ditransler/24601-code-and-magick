@@ -11,6 +11,8 @@
   var setupUpload = setup.querySelector('.upload');
 
   function closeSetup() {
+    window.myWizard.selfRerender();
+
     setup.classList.add('hidden');
     setup.style = '';
     document.removeEventListener('keydown', onSetupEscPress);
